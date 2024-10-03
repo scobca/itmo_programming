@@ -1,3 +1,5 @@
+package lab_1;
+
 import java.util.Arrays;
 
 public class Main {
@@ -8,7 +10,7 @@ public class Main {
 
         // filling in the array z
         for (int i = 0; i < z.length; i++) {
-            z[i] = (short)(15 - i*2);
+            z[i] = (short) (15 - i * 2);
         }
 
 
@@ -19,7 +21,7 @@ public class Main {
         // filling in the array x
         for (int i = 0; i < 13; i++) {
             double num = min + (Math.random() * (max - min));
-            x[i] = (float)(num);
+            x[i] = (float) (num);
         }
 
         // filling in the array w
@@ -50,7 +52,7 @@ public class Main {
     public static void output(double[][] arr) {
         for (double[] doubles : arr) {
             for (double aDouble : doubles) {
-                System.out.printf("%.5f \t", aDouble);
+                System.out.printf("%-12.5f", aDouble);
             }
             System.out.println();
         }
