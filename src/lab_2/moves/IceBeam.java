@@ -1,9 +1,6 @@
 package lab_2.moves;
 
-import ru.ifmo.se.pokemon.Effect;
-import ru.ifmo.se.pokemon.Pokemon;
-import ru.ifmo.se.pokemon.SpecialMove;
-import ru.ifmo.se.pokemon.Type;
+import ru.ifmo.se.pokemon.*;
 
 public class IceBeam extends SpecialMove {
     public IceBeam() {
@@ -13,8 +10,13 @@ public class IceBeam extends SpecialMove {
     @Override
     protected void applyOppEffects(Pokemon pokemon) {
         if (!pokemon.hasType(Type.ICE)) {
-            Effect iceBeam = new Effect().chance(0.1);
+            Effect iceBeam = new Effect().chance(0.1).condition(Status.FREEZE);
             pokemon.addEffect(iceBeam);
         }
+    }
+
+    @Override
+    protected String describe() {
+        return "Using Ice beam move!";
     }
 }

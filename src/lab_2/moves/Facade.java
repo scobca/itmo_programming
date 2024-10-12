@@ -15,9 +15,12 @@ public class Facade extends PhysicalMove {
             case BURN, POISON, PARALYZE -> {
                 this.power = 140;
             }
+            default -> this.power = 70;
         }
     }
 
     @Override
-    protected String describe() { return "Use Facade move"; }
+    protected String describe() {
+        return "Using Facade move";
+    }
 }
