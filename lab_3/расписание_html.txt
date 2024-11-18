@@ -1,0 +1,122 @@
+{
+  "body": {
+    "h4": {
+      "class": "rasp_day_mobile",
+      "text": "Понедельник"
+    },
+    "div": {
+      "class": "rasp_tabl_day",
+      "table": {
+        "border": "0",
+        "cellpadding": "0",
+        "cellspacing": "0",
+        "class": "rasp_tabl",
+        "id": "1day",
+        "tbody": {
+          "tr": [
+            {
+              "th": {
+                "class": "day",
+                "script": "$(\"#1day_btn\").show();",
+                "span": "Пн"
+              },
+              "td": [
+                {
+                  "class": "time",
+                  "span": "13:30-15:00",
+                  "div": "2, 4, 6, 8, 10, 12, 14, 16",
+                  "dd": {
+                    "class": "rasp_aud_mobile",
+                    "text": "2308 (бывш. 306) ауд."
+                  },
+                  "dt": {
+                    "class": "rasp_corp_mobile",
+                    "i": {
+                      "class": "fa fa-map-marker"
+                    },
+                    "span": "Кронверкский пр., д.49, лит.А"
+                  }
+                },
+                {
+                  "class": "room",
+                  "dl": {
+                    "dd": "2308 (бывш. 306) ауд.",
+                    "dt": {
+                      "i": {
+                        "class": "fa fa-map-marker"
+                      },
+                      "span": "Кронверкский пр., д.49, лит.А"
+                    }
+                  }
+                },
+                {
+                  "class": "lesson",
+                  "dl": {
+                    "dd": "Основы профессиональной деятельности(Лаб)",
+                    "dt": {
+                      "b": "Осипов Святослав Владимирович"
+                    },
+                    "text": "четная неделя"
+                  },
+                  "td": {
+                    "class": "lesson-format",
+                    "text": "Очно - дистанционный"
+                  }
+                }
+              ]
+            },
+            {
+              "th": {
+                "class": "day"
+              },
+              "td": [
+                {
+                  "class": "time",
+                  "span": "15:20-16:50",
+                  "div": "2, 4, 6, 8, 10, 12, 14, 16",
+                  "dd": {
+                    "class": "rasp_aud_mobile",
+                    "text": "2308 (бывш. 306) ауд."
+                  },
+                  "dt": {
+                    "class": "rasp_corp_mobile",
+                    "i": {
+                      "class": "fa fa-map-marker"
+                    },
+                    "span": "Кронверкский пр., д.49, лит.А"
+                  }
+                },
+                {
+                  "class": "room",
+                  "dl": {
+                    "dd": "2308 (бывш. 306) ауд.",
+                    "dt": {
+                      "i": {
+                        "class": "fa fa-map-marker"
+                      },
+                      "span": "Кронверкский пр., д.49, лит.А"
+                    }
+                  }
+                },
+                {
+                  "class": "lesson",
+                  "dl": {
+                    "dd": "Основы профессиональной деятельности(Лаб)",
+                    "dt": {
+                      "b": "Осипов Святослав Владимирович"
+                    },
+                    "text": "четная неделя"
+                  },
+                  "td": {
+                    "class": "lesson-format",
+                    "text": "Очно - дистанционный"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}
