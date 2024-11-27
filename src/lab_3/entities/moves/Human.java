@@ -3,9 +3,7 @@ package lab_3.entities.moves;
 import lab_3.entities.Item;
 import lab_3.entities.stats.Place;
 
-public interface HumanMoves {
-    void getCondition();
-
+public interface Human {
     String think();
     String think(String thought);
 
@@ -13,6 +11,10 @@ public interface HumanMoves {
     String pickUp(Item item);
 
     String solve();
+    String solve(String solution);
 
-    String go(Place place, boolean future);
+    String go(String message, Place place, boolean future);
+
+    String know();
+    String know(String thought);
 }

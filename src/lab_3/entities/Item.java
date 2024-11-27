@@ -4,9 +4,9 @@ import lab_3.Entity;
 import lab_3.entities.stats.Size;
 import lab_3.exceptions.NotValidPropertiesException;
 
-public class Item extends Entity {
-    int count;
-    Size size;
+public class Item extends Entity implements lab_3.entities.moves.Item {
+    private final int count;
+    private final Size size;
 
     public Item(String name) throws NotValidPropertiesException {
         super(name);
@@ -20,6 +20,7 @@ public class Item extends Entity {
         checkResult(count, "count", "The count of the items cannot be zero");
     }
 
+    // Setters
     @Override
     public Size setSize(int length) {
         if (length < 10) {
@@ -29,6 +30,15 @@ public class Item extends Entity {
         } else {
             return Size.BIG;
         }
+    }
+
+    // Self methods, getters
+    public int getCount() {
+        return count;
+    }
+
+    public Size getSize() {
+        return size;
     }
 
     @Override

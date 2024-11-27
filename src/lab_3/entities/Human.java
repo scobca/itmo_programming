@@ -1,27 +1,23 @@
 package lab_3.entities;
 
 import lab_3.Entity;
-import lab_3.entities.moves.HumanMoves;
-import lab_3.entities.moves.UniversalMoves;
+import lab_3.entities.moves.Universal;
 import lab_3.entities.stats.*;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
-public class Human extends Entity implements UniversalMoves, HumanMoves {
-    Size size;
-    Sex sex;
-    Status status;
-    Thoughts thought;
-    Place place;
-    Place futurePlace;
-    ArrayList<Item> inventory;
+public class Human extends Entity implements Universal, lab_3.entities.moves.Human {
+    private final Sex sex;
+    private Status status;
+    private Thoughts thought;
+    private Place place;
+    private Place futurePlace;
+    private ArrayList<Item> inventory;
 
     public Human(String name, Sex sex) {
         super(name);
 
-        this.size = setSize(generateNumber());
+        Size size = setSize(generateNumber());
         this.sex = sex;
         this.status = Status.BASIC;
         this.thought = Thoughts.PICK_UP;
@@ -30,6 +26,7 @@ public class Human extends Entity implements UniversalMoves, HumanMoves {
         this.inventory = new ArrayList<>();
     }
 
+    // Self methods
     @Override
     public Size setSize(int tall) {
         if (tall < 160) {
@@ -46,29 +43,46 @@ public class Human extends Entity implements UniversalMoves, HumanMoves {
         return (int) (Math.random() * 100) + 100;
     }
 
-    // Universal moves
+    // Universal moves, getters
     @Override
     public String getInventory(ArrayList<Item> items) {
         return this.inventory.toString();
     }
 
-    // Human moves
-    @Override
-    public void getCondition() {
-        Map<String, String> condition = new HashMap<>();
-
-        condition.put("name", this.name);
-        condition.put("size", this.size.toString());
-        condition.put("sex", this.sex.toString());
-        condition.put("status", this.status.toString());
-        condition.put("thought", this.thought.toString());
-        condition.put("place", this.place.toString());
-        condition.put("futurePlace", this.futurePlace.toString());
-        condition.put("inventory", this.inventory.toString());
-
-        System.out.println(this.name + " " + "condition: " + condition);
+    public Sex getSex() {
+        return sex;
     }
 
+    public Status getStatus() {
+        return status;
+    }
+
+    public Thoughts getThought() {
+        return thought;
+    }
+
+    public Place getPlace() {
+        return place;
+    }
+
+    public Place getFuturePlace() {
+        return futurePlace;
+    }
+
+    @Override
+    public String toString() {
+        return "Human{" +
+                "name='" + name + '\'' +
+                ", inventory=" + inventory +
+                ", futurePlace=" + futurePlace +
+                ", place=" + place +
+                ", thought=" + thought +
+                ", status=" + status +
+                ", sex=" + sex +
+                '}';
+    }
+
+    // Human moves
     @Override
     public String think() {
        this.status = Status.THINKING;
@@ -100,16 +114,34 @@ public class Human extends Entity implements UniversalMoves, HumanMoves {
     }
 
     @Override
-    public String go(Place place, boolean future) {
+    public String solve(String solution) {
+        this.status = Status.TUNED;
+        this.thought = Thoughts.TUNED;
+        return ("решил " + solution);
+    }
+
+    @Override
+    public String go(String message, Place place, boolean future) {
         if (future) {
             this.futurePlace = place;
             this.status = Status.TUNED;
             this.thought = Thoughts.TUNED;
-            return ("пойдет к " + place);
+            return ("пойдет к " + message);
         } else {
             this.place = place;
             this.status = Status.GOING;
-            return ("пошел к " + place);
+            return ("пошел к " + message);
         }
     }
+
+    @Override
+    public String know() {
+        return "знал ";
+    }
+
+    @Override
+    public String know(String thought) {
+        return "знал, что: " + thought;
+    }
+
 }

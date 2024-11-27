@@ -1,18 +1,18 @@
 package lab_3.entities;
 
 import lab_3.Entity;
-import lab_3.entities.moves.UniversalMoves;
+import lab_3.entities.moves.Universal;
 import lab_3.entities.stats.Place;
 import lab_3.entities.stats.Size;
 import lab_3.exceptions.NotValidPropertiesException;
 
 import java.util.ArrayList;
 
-public class Ship extends Entity implements UniversalMoves {
-    int length;
-    Place place;
-    Size size;
-    ArrayList<Item> inventory;
+public class Ship extends Entity implements Universal, lab_3.entities.moves.Ship {
+    private final int length;
+    private final Size size;
+    private Place place;
+    private ArrayList<Item> inventory;
 
     public Ship(String name) throws NotValidPropertiesException {
         super(name);
@@ -28,6 +28,7 @@ public class Ship extends Entity implements UniversalMoves {
         this.place = Place.BEACH;
     }
 
+    // Setters
     @Override
     public Size setSize(int countOfItems) {
         if (length < 20) {
@@ -37,6 +38,34 @@ public class Ship extends Entity implements UniversalMoves {
         } else {
             return Size.BIG;
         }
+    }
+
+    // Self methods, getters
+    public int getLength() {
+        return length;
+    }
+
+    public Size getSize() {
+        return size;
+    }
+
+    public Place getPlace() {
+        return place;
+    }
+
+    public ArrayList<Item> getInventory() {
+        return inventory;
+    }
+
+    @Override
+    public String toString() {
+        return "Ship{" +
+                "length=" + length +
+                ", size=" + size +
+                ", place=" + place +
+                ", inventory=" + inventory +
+                ", name='" + name + '\'' +
+                '}';
     }
 
     // Universal moves
