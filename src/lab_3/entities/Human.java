@@ -15,6 +15,7 @@ public class Human extends Entity implements UniversalMoves, HumanMoves {
     Status status;
     Thoughts thought;
     Place place;
+    Place futurePlace;
     ArrayList<Item> inventory;
 
     public Human(String name, Sex sex) {
@@ -25,6 +26,7 @@ public class Human extends Entity implements UniversalMoves, HumanMoves {
         this.status = Status.BASIC;
         this.thought = Thoughts.PICK_UP;
         this.place = Place.BEACH;
+        this.futurePlace = Place.NONE;
         this.inventory = new ArrayList<>();
     }
 
@@ -61,6 +63,7 @@ public class Human extends Entity implements UniversalMoves, HumanMoves {
         condition.put("status", this.status.toString());
         condition.put("thought", this.thought.toString());
         condition.put("place", this.place.toString());
+        condition.put("futurePlace", this.futurePlace.toString());
         condition.put("inventory", this.inventory.toString());
 
         System.out.println(this.name + " " + "condition: " + condition);
@@ -87,5 +90,26 @@ public class Human extends Entity implements UniversalMoves, HumanMoves {
     public String pickUp(Item item) {
         this.inventory.add(item);
         return ("Предмет " + item.name + " подобран. " + "Инвентарь " + this.name +  ": " + this.getInventory(inventory));
+    }
+
+    @Override
+    public String solve() {
+        this.status = Status.TUNED;
+        this.thought = Thoughts.TUNED;
+        return ("решил ");
+    }
+
+    @Override
+    public String go(Place place, boolean future) {
+        if (future) {
+            this.futurePlace = place;
+            this.status = Status.TUNED;
+            this.thought = Thoughts.TUNED;
+            return ("пойдет к " + place);
+        } else {
+            this.place = place;
+            this.status = Status.GOING;
+            return ("пошел к " + place);
+        }
     }
 }
