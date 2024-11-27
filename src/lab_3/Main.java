@@ -3,23 +3,30 @@ package lab_3;
 import lab_3.entities.Human;
 import lab_3.entities.Item;
 import lab_3.entities.Ship;
-import lab_3.entities.stats.Other;
-import lab_3.entities.stats.Place;
-import lab_3.entities.stats.Sex;
-import lab_3.entities.stats.Unions;
+import lab_3.entities.stats.*;
 import lab_3.exceptions.NotValidPropertiesException;
+
+import static lab_3.utils.RandomGenerator.generateNumber;
 
 public class Main {
     public static void main(String[] args) throws NotValidPropertiesException {
         Human Alex = new Human("Alex", Sex.MALE);
 
-        Item sail = new Item("Sail");   // паруса
-        Item rope = new Item("Rope");   // канаты
 
-        Ship ship = new Ship("Черная жемчужина");
 
-        System.out.println("" + Unions.BIG_BUT + Unions.NOW + Alex.getName() + " " + Alex.think() + "о том, как бы " + Alex.pickUp() + "с " + ship.name + " " + Unions.ALL + "что там оставалось и могло пригодиться " + Alex.getName() + Other.DOT);
+        Item sail = new Item("Парус",
+                generateNumber("length", "The size of the item cannot be zero"),
+                generateNumber("count", "The count of the items cannot be zero"));
+
+        Item rope = new Item("Канат",
+                generateNumber("length", "The size of the item cannot be zero"),
+                generateNumber("count", "The count of the items cannot be zero"));
+
+        Ship ship = new Ship("Черная жемчужина", generateNumber("length", "The length of the ship cannot be zero."));
+
+        System.out.println("" + Unions.BIG_BUT + Unions.NOW + Alex.getName() + " " + Alex.think() + "о том, как бы " + Alex.pickUp() + "с " + ship.getName() + " " + Unions.ALL + "что там оставалось и могло пригодиться " + Alex.getName() + Other.DOT);
         System.out.println("Прежде всего: " + sail.getName() + Unions.AND + rope.getName() + Other.DOT);
-        System.out.println(Unions.BIG_SO + Alex.getName() + Alex.solve() + Unions.IF + "ничего не помешает" + Alex.getName() + Alex.go(Place.SHIP, true));
+        System.out.println(Unions.BIG_SO + Alex.getName() + Alex.solve() + Unions.IF + "ничего не помешает " + Alex.getName() + Alex.go(ship.getName(), Place.SHIP, true) + Other.DOT);
+        System.out.println("А так как " + Alex.getName() + Alex.know("при первой буре " + ship.getName() + "разобьёт в щепки") + Other.COMMA + Pronouns.HE + Alex.solve("отложить другие дела"));
     }
 }

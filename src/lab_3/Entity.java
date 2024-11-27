@@ -11,10 +11,6 @@ public abstract class Entity {
 
     public abstract Size setSize(int countableParam);
 
-    public int generateNumber() {
-        return (int) (Math.random() * 100);
-    }
-
     public String  getName() {
         return (this.name + " ");
     }

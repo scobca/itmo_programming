@@ -6,17 +6,18 @@ import lab_3.exceptions.NotValidPropertiesException;
 
 public class Item extends Entity implements lab_3.entities.moves.Item {
     private final int count;
+    private final int length;
     private final Size size;
 
-    public Item(String name) throws NotValidPropertiesException {
+    public Item(String name, int length, int count) throws NotValidPropertiesException {
         super(name);
 
-        int length = super.generateNumber();
+        this.length = length;
+        this.count = count;
         checkResult(length, "length", "The size of the item cannot be zero");
 
         this.size = setSize(length);
 
-        this.count = super.generateNumber();
         checkResult(count, "count", "The count of the items cannot be zero");
     }
 
@@ -37,6 +38,10 @@ public class Item extends Entity implements lab_3.entities.moves.Item {
         return count;
     }
 
+    public int getLength() {
+        return length;
+    }
+
     public Size getSize() {
         return size;
     }
@@ -55,4 +60,6 @@ public class Item extends Entity implements lab_3.entities.moves.Item {
             throw new NotValidPropertiesException(propertyName, message);
         }
     }
+
+
 }

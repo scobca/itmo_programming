@@ -9,28 +9,23 @@ import lab_3.exceptions.NotValidPropertiesException;
 import java.util.ArrayList;
 
 public class Ship extends Entity implements Universal, lab_3.entities.moves.Ship {
-    private final int length;
     private final Size size;
+    private final int length;
     private Place place;
     private ArrayList<Item> inventory;
 
-    public Ship(String name) throws NotValidPropertiesException {
+    public Ship(String name, int length) throws NotValidPropertiesException {
         super(name);
 
-        this.length = super.generateNumber();
-
-        if (length == 0) {
-            throw new NotValidPropertiesException("length", "The length of the ship cannot be zero.");
-        }
-
-        this.size = setSize(super.generateNumber());
+        this.size = setSize(length);
+        this.length = length;
         this.inventory = new ArrayList<>();
         this.place = Place.BEACH;
     }
 
     // Setters
     @Override
-    public Size setSize(int countOfItems) {
+    public Size setSize(int length) {
         if (length < 20) {
             return Size.SMALL;
         } else if (length < 50) {
@@ -56,7 +51,7 @@ public class Ship extends Entity implements Universal, lab_3.entities.moves.Ship
     public ArrayList<Item> getInventory() {
         return inventory;
     }
-
+    
     @Override
     public String toString() {
         return "Ship{" +
