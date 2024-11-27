@@ -1,18 +1,19 @@
 package lab_3.entities;
 
 import lab_3.Entity;
+import lab_3.entities.moves.HumanMoves;
 import lab_3.entities.moves.UniversalMoves;
-import lab_3.entities.stats.Place;
-import lab_3.entities.stats.Sex;
-import lab_3.entities.stats.Size;
-import lab_3.entities.stats.Status;
+import lab_3.entities.stats.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
-public class Human extends Entity implements UniversalMoves {
+public class Human extends Entity implements UniversalMoves, HumanMoves {
     Size size;
     Sex sex;
     Status status;
+    Thoughts thought;
     Place place;
     ArrayList<Item> inventory;
 
@@ -22,6 +23,7 @@ public class Human extends Entity implements UniversalMoves {
         this.size = setSize(generateNumber());
         this.sex = sex;
         this.status = Status.BASIC;
+        this.thought = Thoughts.PICK_UP;
         this.place = Place.BEACH;
         this.inventory = new ArrayList<>();
     }
@@ -46,5 +48,44 @@ public class Human extends Entity implements UniversalMoves {
     @Override
     public String getInventory(ArrayList<Item> items) {
         return this.inventory.toString();
+    }
+
+    // Human moves
+    @Override
+    public void getCondition() {
+        Map<String, String> condition = new HashMap<>();
+
+        condition.put("name", this.name);
+        condition.put("size", this.size.toString());
+        condition.put("sex", this.sex.toString());
+        condition.put("status", this.status.toString());
+        condition.put("thought", this.thought.toString());
+        condition.put("place", this.place.toString());
+        condition.put("inventory", this.inventory.toString());
+
+        System.out.println(this.name + " " + "condition: " + condition);
+    }
+
+    @Override
+    public String think() {
+       this.status = Status.THINKING;
+        return ("думал ");
+    }
+
+    @Override
+    public String think(String thought) {
+        this.status = Status.THINKING;
+        return ("думал: " + "'" + thought + "'" + " ");
+    }
+
+    @Override
+    public String pickUp() {
+        return "забрать ";
+    }
+
+    @Override
+    public String pickUp(Item item) {
+        this.inventory.add(item);
+        return ("Предмет " + item.name + " подобран. " + "Инвентарь " + this.name +  ": " + this.getInventory(inventory));
     }
 }
