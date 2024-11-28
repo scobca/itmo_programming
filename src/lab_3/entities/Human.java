@@ -8,16 +8,17 @@ import java.util.ArrayList;
 
 public class Human extends Entity implements Universal, lab_3.entities.moves.Human {
     private final Sex sex;
+    private final Size size;
     private Status status;
     private Thoughts thought;
     private Place place;
     private Place futurePlace;
     private ArrayList<Item> inventory;
 
-    public Human(String name, Sex sex) {
+    public Human(String name, Sex sex, int tall) {
         super(name);
 
-        Size size = setSize(generateNumber());
+        this.size = setSize(tall);
         this.sex = sex;
         this.status = Status.BASIC;
         this.thought = Thoughts.PICK_UP;
@@ -38,11 +39,6 @@ public class Human extends Entity implements Universal, lab_3.entities.moves.Hum
         }
     }
 
-    @Override
-    public int generateNumber() {
-        return (int) (Math.random() * 100) + 100;
-    }
-
     // Universal moves, getters
     @Override
     public String getInventory(ArrayList<Item> items) {
@@ -51,6 +47,10 @@ public class Human extends Entity implements Universal, lab_3.entities.moves.Hum
 
     public Sex getSex() {
         return sex;
+    }
+
+    public Size getSize() {
+        return size;
     }
 
     public Status getStatus() {
@@ -143,5 +143,4 @@ public class Human extends Entity implements Universal, lab_3.entities.moves.Hum
     public String know(String thought) {
         return "знал, что: " + thought;
     }
-
 }

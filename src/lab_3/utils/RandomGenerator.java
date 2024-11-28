@@ -14,4 +14,8 @@ public class RandomGenerator {
 
         return number;
     }
+
+    public static int generateNumber() throws NotValidPropertiesException {
+        return (int) (Math.random() * 100);
+    }
 }
