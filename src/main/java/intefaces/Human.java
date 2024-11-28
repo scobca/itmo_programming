@@ -1,7 +1,8 @@
 package intefaces;
 
-import lab_3.entities.Item;
-import lab_3.entities.stats.Place;
+
+import entities.Item;
+import stats.Place;
 
 public interface Human {
     String think();

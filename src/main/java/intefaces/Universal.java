@@ -1,6 +1,6 @@
 package intefaces;
 
-import lab_3.entities.Item;
+import entities.Item;
 
 import java.util.ArrayList;
 
