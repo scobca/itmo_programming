@@ -4,7 +4,7 @@ public enum Unions {
     BUT("но "), BIG_BUT("Но "),
     AND("и "), BIG_AND("И "),
     NOW("теперь "), BIG_NOW("Теперь "),
-    ALL("всё "), BIG_ALL("Всё "),
+    ALL("всe "), BIG_ALL("Всe "),
     SO("поэтому "), BIG_SO("Поэтому "),
     IF("если "), BIG_IF("Если ");
 
