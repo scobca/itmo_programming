@@ -1,6 +1,7 @@
 package entities;
 
 import intefaces.Universal;
+import lombok.Getter;
 import stats.Sex;
 import stats.Status;
 import stats.Thoughts;
@@ -9,12 +10,14 @@ import stats.Size;
 
 import java.util.ArrayList;
 
+@Getter
 public class Human extends Entity implements Universal, intefaces.Human {
     private final Sex sex;
     private final Size size;
     private Status status;
     private Thoughts thought;
     private Place place;
+    @Getter
     private Place futurePlace;
     private ArrayList<Item> inventory;
 
@@ -48,34 +51,10 @@ public class Human extends Entity implements Universal, intefaces.Human {
         return this.inventory.toString();
     }
 
-    public Sex getSex() {
-        return sex;
-    }
-
-    public Size getSize() {
-        return size;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public Thoughts getThought() {
-        return thought;
-    }
-
-    public Place getPlace() {
-        return place;
-    }
-
-    public Place getFuturePlace() {
-        return futurePlace;
-    }
-
     @Override
     public String toString() {
         return "Human{" +
-                "name='" + name + '\'' +
+                "name='" + super.getName() + '\'' +
                 ", inventory=" + inventory +
                 ", futurePlace=" + futurePlace +
                 ", place=" + place +
@@ -106,7 +85,7 @@ public class Human extends Entity implements Universal, intefaces.Human {
     @Override
     public String pickUp(Item item) {
         this.inventory.add(item);
-        return ("Предмет " + item.name + " подобран. " + "Инвентарь " + this.name +  ": " + this.getInventory(inventory));
+        return ("Предмет " + item.getName() + " подобран. " + "Инвентарь " + this.getName() +  ": " + this.getInventory(inventory));
     }
 
     @Override

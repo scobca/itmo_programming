@@ -1,7 +1,9 @@
 package entities;
 
+import lombok.Getter;
 import stats.Size;
 
+@Getter
 public class Item extends Entity implements intefaces.Item {
     private final int count;
     private final int length;
@@ -12,6 +14,13 @@ public class Item extends Entity implements intefaces.Item {
         this.length = length;
         this.count = count;
         this.size = setSize(length);
+    }
+
+    public Item(String name, Size size) {
+        super(name);
+        this.count = 1;
+        this.length = 1;
+        this.size = size;
     }
 
     // Setters
@@ -26,23 +35,11 @@ public class Item extends Entity implements intefaces.Item {
         }
     }
 
-    // Self methods, getters
-    public int getCount() {
-        return count;
-    }
-
-    public int getLength() {
-        return length;
-    }
-
-    public Size getSize() {
-        return size;
-    }
-
+    //self methods
     @Override
     public String toString() {
         return "Item {" +
-                "name: '" + name + '\'' +
+                "name: '" + super.getName() + '\'' +
                 ", count: " + count +
                 ", size: " + size +
                 '}';

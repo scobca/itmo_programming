@@ -1,11 +1,13 @@
 package entities;
 
 import intefaces.Universal;
+import lombok.Getter;
 import stats.Place;
 import stats.Size;
 
 import java.util.ArrayList;
 
+@Getter
 public class Ship extends Entity implements Universal, intefaces.Ship {
     private final Size size;
     private final int length;
@@ -33,23 +35,6 @@ public class Ship extends Entity implements Universal, intefaces.Ship {
         }
     }
 
-    // Self methods, getters
-    public int getLength() {
-        return length;
-    }
-
-    public Size getSize() {
-        return size;
-    }
-
-    public Place getPlace() {
-        return place;
-    }
-
-    public ArrayList<Item> getInventory() {
-        return inventory;
-    }
-    
     @Override
     public String toString() {
         return "Ship{" +
@@ -57,7 +42,7 @@ public class Ship extends Entity implements Universal, intefaces.Ship {
                 ", size=" + size +
                 ", place=" + place +
                 ", inventory=" + inventory +
-                ", name='" + name + '\'' +
+                ", name='" + super.getName() + '\'' +
                 '}';
     }
 
