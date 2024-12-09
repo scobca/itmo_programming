@@ -23,6 +23,20 @@ tasks.test {
     useJUnitPlatform()
 }
 
+tasks {
+    withType<JavaCompile>().configureEach {
+        options.encoding = "windows-1251"
+    }
+
+    withType<Javadoc>().configureEach {
+        options.encoding = "windows-1251"
+    }
+
+    withType<Test>().configureEach {
+        systemProperty("file.encoding", "windows-1251")
+    }
+}
+
 application {
     mainClass.set("Main")
 }
