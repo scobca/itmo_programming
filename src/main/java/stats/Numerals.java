@@ -1,7 +1,8 @@
 package stats;
 
 public enum Numerals {
-    FIRST("первый "), BIG_FIRST("Первый "),
+    ONE("один "), BIG_ONE("Один "),
+    FIRST("первый "), BIG_FIRST("Первый "), FIRST_TIME("первый раз "),
     SECOND("второй "), BIG_SECOND("Второй "), SECOND_TIME("второй раз "),
     THIRD("третий "), BIG_THIRD("Третий ");
 

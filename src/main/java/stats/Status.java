@@ -5,4 +5,5 @@ public enum Status {
     THINKING,
     TUNED,
     GOING,
+    WAITING,
 }

@@ -2,6 +2,7 @@ package stats;
 
 public enum Thoughts {
     PICK_UP("Хочет что-то забрать"),
+    BRING("Хочет что-то взять с собой"),
     TUNED("Настроился на какое-то действие");
 
     private final String thought;

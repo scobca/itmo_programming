@@ -6,7 +6,15 @@ public enum Unions {
     NOW("теперь "), BIG_NOW("Теперь "),
     ALL("всe "), BIG_ALL("Всe "),
     SO("поэтому "), BIG_SO("Поэтому "),
-    IF("если "), BIG_IF("Если ");
+    WHILE("пока "), BIG_WHILE("Пока "),
+    NOT("не "), BIG_NOT("Не "),
+    IF("если "), BIG_IF("Если "),
+    WHAT("что "), BIG_WHAT("Что "),
+    ON("на "), BIG_ON("На "),
+    IN("в "), BIG_IN("В "),
+    THIS("это "), BIG_THIS("Это "),
+    HOW("как "), BIG_HOW("Как "),
+    ONLY("только "), BIG_ONLY("Только ");
 
 
     private final String name;
