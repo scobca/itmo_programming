@@ -1,20 +1,27 @@
 package entities;
 
-import intefaces.Universal;
+import lombok.Getter;
+import stats.RaftStats;
 import stats.Size;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+@Getter
+public class Raft extends Entity implements intefaces.Raft {
+    // Self methods, getters
+    @Getter
+    private RaftInventory inventory;
+    private Size size;
+    private List<RaftStats> raftStats;
 
-public record Raft(String name, List<Item> inventory, Size size) implements Universal, intefaces.Raft {
-
-    public Raft(String name, List<Item> inventory) {
-        this(name, inventory, setSize(inventory.size()));
+    public Raft(String name) {
+        super(name);
     }
 
-    // Setters
-    private static Size setSize(int countOfItems) {
+    @Override
+    public Size setSize(int countOfItems) {
         if (countOfItems <= 3) {
             return Size.SMALL;
         } else if (countOfItems <= 7) {
@@ -24,9 +31,25 @@ public record Raft(String name, List<Item> inventory, Size size) implements Univ
         }
     }
 
-    // Self methods, getters
+    public boolean isItemInRaftInventory(Item item) {
+        return this.inventory.items().contains(item);
+    }
+
+    //Raft interface
     @Override
-    public String getInventory(ArrayList<Item> items) {
-        return this.inventory.toString();
+    public void setRaftInventory(Item... items) {
+        ArrayList<Item> itemsArray = new ArrayList<Item>(Arrays.asList(items));
+
+        this.inventory = new RaftInventory(itemsArray);
+    }
+
+    @Override
+    public boolean checkItemContains(Item item) {
+        return this.inventory.items().contains(item);
+    }
+
+    @Override
+    public void setRaftStats(RaftStats... stats) {
+        this.raftStats = Arrays.asList(stats);
     }
 }

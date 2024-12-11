@@ -6,4 +6,6 @@ public enum Status {
     TUNED,
     GOING,
     WAITING,
+    WEAKEN,
+    WORKING,
 }

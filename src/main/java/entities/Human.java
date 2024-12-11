@@ -1,25 +1,24 @@
 package entities;
 
+import exceptions.ObjectNotExistException;
 import intefaces.Universal;
 import lombok.Getter;
-import stats.Sex;
-import stats.Status;
-import stats.Thoughts;
-import stats.Place;
-import stats.Size;
+import lombok.Setter;
+import stats.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Getter
+@Setter
 public class Human extends Entity implements Universal, intefaces.Human {
     private final Sex sex;
     private final Size size;
     private Status status;
     private Thoughts thought;
     private Place place;
-    @Getter
     private Place futurePlace;
-    private ArrayList<Item> inventory;
+    private final ArrayList<Item> inventory;
 
     public Human(String name, Sex sex, int tall) {
         super(name);
@@ -28,7 +27,7 @@ public class Human extends Entity implements Universal, intefaces.Human {
         this.sex = sex;
         this.status = Status.BASIC;
         this.thought = Thoughts.PICK_UP;
-        this.place = Place.BEACH;
+        this.place = Place.HOUSE;
         this.futurePlace = Place.NONE;
         this.inventory = new ArrayList<>();
     }
@@ -45,10 +44,15 @@ public class Human extends Entity implements Universal, intefaces.Human {
         }
     }
 
+    //Setters
+    public void addItemsToInventory(Item... items) {
+        this.inventory.addAll(List.of(items));
+    }
+
     // Universal moves, getters
     @Override
-    public String getInventory(ArrayList<Item> items) {
-        return this.inventory.toString();
+    public ArrayList<Item> getInventory() {
+        return this.inventory;
     }
 
     @Override
@@ -85,7 +89,7 @@ public class Human extends Entity implements Universal, intefaces.Human {
     @Override
     public String pickUp(Item item) {
         this.inventory.add(item);
-        return ("Предмет " + item.getName() + " подобран. " + "Инвентарь " + this.getName() +  ": " + this.getInventory(inventory));
+        return ("Предмет " + item.getName() + " подобран. " + "Инвентарь " + this.getName() +  ": " + this.getInventory());
     }
 
     @Override
@@ -111,6 +115,11 @@ public class Human extends Entity implements Universal, intefaces.Human {
             return ("пойдет к " + message);
         } else {
             this.place = place;
+
+            if (this.place == this.futurePlace) {
+                this.futurePlace = Place.NONE;
+            }
+
             this.status = Status.GOING;
             return ("пошел к " + message);
         }
@@ -124,5 +133,154 @@ public class Human extends Entity implements Universal, intefaces.Human {
     @Override
     public String know(String thought) {
         return "знал, что: " + thought;
+    }
+
+    @Override
+    public String carry(Unions union, Place place) {
+        return "отвезти " + union + place;
+    }
+
+    @Override
+    public String carry(Unions union, Place place, Raft raft) {
+        this.inventory.addAll(raft.getInventory().items());
+        return "отвез " + union + place;
+    }
+
+    @Override
+    public String became() {
+        return "стал ";
+    }
+
+    @Override
+    public String hold() {
+        return "держать ";
+    }
+
+    @Override
+    public String hold(Item item) {
+        try {
+            if (this.inventory.contains(item)) {
+                return "держать " + item.getName() + " ";
+            } else {
+                throw new ObjectNotExistException("Object in inventory not exist: " + item.getName());
+            }
+        } catch (ObjectNotExistException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        return "держвать " + item.getName() + " ";
+    }
+
+    @Override
+    public String bring(String context, Entity entity) {
+        this.thought = Thoughts.BRING;
+        return "взять " + context + entity.getName() + " ";
+    }
+
+    @Override
+    public String bring(String context, Place place) {
+        this.place = place;
+
+        if (this.futurePlace == place) {
+            this.futurePlace = Place.NONE;
+        }
+
+        return "взял " + context + place;
+    }
+
+    @Override
+    public String wait(String message, Event event) {
+        this.status = Status.WAITING;
+        return (message + event.getName());
+    }
+
+    @Override
+    public String undress() {
+        return "разделся ";
+    }
+
+    @Override
+    public String undress(Item... items) {
+        try {
+            for (Item item : items) {
+               if (!this.inventory.contains(item)) {
+                   throw new ObjectNotExistException("Object in inventory not exist: " + item.getName());
+               }
+            }
+        } catch (ObjectNotExistException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+
+        return "разделся ";
+    }
+
+    @Override
+    public String climb(Place place) {
+        this.place = place;
+
+        if (this.futurePlace == place) {
+            this.futurePlace = Place.NONE;
+        }
+
+        return "взобрался на " + place;
+    }
+
+    @Override
+    public String build (Raft raft) {
+        return "построил " + raft.getName();
+    }
+
+    @Override
+    public String make(String message, Raft raft, RaftStats... raftStats) {
+        raft.setRaftStats(raftStats);
+        return message + " " + raft.getName();
+    }
+
+    @Override
+    public String upload(Ship ship, Raft raft, Item... items) {
+        ArrayList<Item> shipInventory = ship.getInventory();
+        List<Item> newRaftInventory = new ArrayList<>();
+
+        try {
+            for (Item item : items) {
+                if (shipInventory.contains(item)) {
+                    newRaftInventory.add(item);
+                } else {
+                    throw new ObjectNotExistException("Object in inventory not exist: " + item.getName());
+                }
+            }
+        } catch (ObjectNotExistException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+
+        for (Item item : newRaftInventory) {
+            raft.setRaftInventory(item);
+            ship.removeItemFromInventory(item);
+        }
+
+        return "нагрузил " + raft.getName();
+    }
+
+    @Override
+    public String upload(Raft raft, Place place) {
+        this.status = Status.WORKING;
+        this.futurePlace = place;
+        return "погрузил на " + raft.getName();
+    }
+
+    @Override
+    public String notEnoughStrength() {
+        this.status = Status.WEAKEN;
+        this.thought = Thoughts.UPSET;
+        return "не хватило сил ";
+    }
+
+    @Override
+    public String pullDown() {
+        return "спустить ";
+    }
+
+    @Override
+    public String found() {
+        return "нашел ";
     }
 }

@@ -6,12 +6,13 @@ import stats.Place;
 import stats.Size;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 @Getter
 public class Ship extends Entity implements Universal, intefaces.Ship {
     private final Size size;
     private final int length;
-    private Place place;
+    private final Place place;
     private ArrayList<Item> inventory;
 
     public Ship(String name, int length) {
@@ -19,7 +20,6 @@ public class Ship extends Entity implements Universal, intefaces.Ship {
 
         this.size = setSize(length);
         this.length = length;
-        this.inventory = new ArrayList<>();
         this.place = Place.BEACH;
     }
 
@@ -46,9 +46,20 @@ public class Ship extends Entity implements Universal, intefaces.Ship {
                 '}';
     }
 
+    @Override
+    public void setShipInventory(Item... items) {
+        this.inventory = new ArrayList<Item>();
+        inventory.addAll(Arrays.asList(items));
+    }
+
+    @Override
+    public void removeItemFromInventory(Item... items) {
+        this.inventory.removeAll(Arrays.asList(items));
+    }
+
     // Universal moves
     @Override
-    public String getInventory(ArrayList<Item> inventory) {
-        return inventory.toString();
+    public ArrayList<Item> getInventory() {
+        return this.inventory;
     }
 }

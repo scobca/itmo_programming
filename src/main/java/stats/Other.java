@@ -1,7 +1,7 @@
 package stats;
 
 public enum Other {
-    DOT(". "), COMMA(", "), DASH("- "), EXCLAMATION_MARK("! "), QUESTION_MARK("? "), COLON(": ");
+    DOT(". "), COMMA(", "), DASH("- "), EXCLAMATION_MARK("! "), QUESTION_MARK("? "), COLON(": "), SEMICOLON("; ");
 
     private final String symbol;
 

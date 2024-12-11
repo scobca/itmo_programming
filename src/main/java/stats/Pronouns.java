@@ -1,7 +1,7 @@
 package stats;
 
 public enum Pronouns {
-    HE("он ");
+    HE("он "), OUR("наш "), HIM("его ");
 
     private final String pronoun;
 

@@ -14,6 +14,12 @@ public enum Unions {
     IN("в "), BIG_IN("В "),
     THIS("это "), BIG_THIS("Это "),
     HOW("как "), BIG_HOW("Как "),
+    BY("по "), BIG_BY("По "),
+    AFTER("потом "), BIG_AFTER("Потом "),
+    WAS("был "), BIG_WAS("Был "),
+    OR("или "), BIG_OR("Или "),
+    SOME("немного "), BIG_SOME("Немного "),
+    LAST("последний "), BIG_LAST("Послений "),
     ONLY("только "), BIG_ONLY("Только ");
 
 
