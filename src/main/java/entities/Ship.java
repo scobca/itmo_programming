@@ -35,6 +35,7 @@ public class Ship extends Entity implements Universal, intefaces.Ship {
         }
     }
 
+    //self methods
     @Override
     public String toString() {
         return "Ship{" +
@@ -47,8 +48,25 @@ public class Ship extends Entity implements Universal, intefaces.Ship {
     }
 
     @Override
+    public int hashCode() {
+        int result = this.getName().hashCode() + this.getSize().hashCode();
+
+        result = 31 * result;
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Ship ship = (Ship) o;
+        return length == ship.length;
+    }
+
+    @Override
     public void setShipInventory(Item... items) {
-        this.inventory = new ArrayList<Item>();
+        this.inventory = new ArrayList<>();
         inventory.addAll(Arrays.asList(items));
     }
 

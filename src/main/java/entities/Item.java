@@ -60,6 +60,23 @@ public class Item extends Entity implements intefaces.Item {
                 '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Item item = (Item) o;
+        return item.getName() == this.getName();
+    }
+
+    @Override
+    public int hashCode() {
+        int result = this.getName().hashCode();
+
+        result = 12 * result + this.getLength() / 3;
+        return result;
+    }
+
     // Item interface
     @Override
     public String wasFound(Item item) {

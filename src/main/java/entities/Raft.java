@@ -10,7 +10,6 @@ import java.util.List;
 
 @Getter
 public class Raft extends Entity implements intefaces.Raft {
-    // Self methods, getters
     @Getter
     private RaftInventory inventory;
     private Size size;
@@ -18,6 +17,33 @@ public class Raft extends Entity implements intefaces.Raft {
 
     public Raft(String name) {
         super(name);
+    }
+
+    // Self methods, getters
+    @Override
+    public int hashCode() {
+        int result = this.getName().hashCode() + this.getInventory().hashCode();
+        result = 31 * result + this.getSize().hashCode();
+
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Raft raft = (Raft) o;
+        return this.getName() == raft.getName();
+    }
+
+    @Override
+    public String toString() {
+        return "Raft{" +
+                "inventory=" + inventory +
+                ", size=" + size +
+                ", raftStats=" + raftStats +
+                '}';
     }
 
     @Override
@@ -38,8 +64,9 @@ public class Raft extends Entity implements intefaces.Raft {
     //Raft interface
     @Override
     public void setRaftInventory(Item... items) {
-        ArrayList<Item> itemsArray = new ArrayList<Item>(Arrays.asList(items));
+        ArrayList<Item> itemsArray = new ArrayList<>(Arrays.asList(items));
 
+        this.size = setSize(itemsArray.size());
         this.inventory = new RaftInventory(itemsArray);
     }
 
